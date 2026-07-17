@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   window.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gechavia <gechavia@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/17 03:23:50 by gechavia          #+#    #+#             */
+/*   Updated: 2026/07/17 03:24:25 by gechavia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-/* Crée la connexion, la fenêtre et l'image de travail unique.
-   Retourne 0 en cas d'échec (chaque étape mlx peut renvoyer NULL). */
+/* Crée la connexion, la fenêtre et l'image */
 int	init_window(t_data *d)
 {
 	d->mlx = mlx_init();
@@ -21,7 +32,7 @@ int	init_window(t_data *d)
 }
 
 /* Libération propre : image, fenêtre, display, contexte.
-   mlx_destroy_display + free(mlx) sont specifiques Linux. */
+   mlx_destroy_display + free(mlx) */
 int	close_program(t_data *d)
 {
 	if (d->img.ptr)

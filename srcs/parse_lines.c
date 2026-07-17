@@ -1,0 +1,82 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_lines.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gechavia <gechavia@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/12 00:00:00 by gechavia          #+#    #+#             */
+/*   Updated: 2026/07/17 03:20:37 by gechavia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
+
+/* Avance les espaces et tab */
+char	*skip_spaces(char *s)
+{
+	while (*s == ' ' || *s == '\t')
+		s++;
+	return (s);
+}
+
+/* Une ligne est "vide" si elle a que des espaces/tabs */
+int	line_is_empty(char *s)
+{
+	return (*skip_spaces(s) == '\0');
+}
+
+/* 1=NO 2=SO 3=WE 4=EA 5=F 6=C,
+   0 = début de la map. Le next char doit être espace / tab / fin ligne */
+int	get_element_id(char *s)
+{
+	if (!ft_strncmp(s, "NO", 2) && (s[2] == ' ' || s[2] == '\t' || !s[2]))
+		return (1);
+	if (!ft_strncmp(s, "SO", 2) && (s[2] == ' ' || s[2] == '\t' || !s[2]))
+		return (2);
+	if (!ft_strncmp(s, "WE", 2) && (s[2] == ' ' || s[2] == '\t' || !s[2]))
+		return (3);
+	if (!ft_strncmp(s, "EA", 2) && (s[2] == ' ' || s[2] == '\t' || !s[2]))
+		return (4);
+	if (s[0] == 'F' && (s[1] == ' ' || s[1] == '\t' || !s[1]))
+		return (5);
+	if (s[0] == 'C' && (s[1] == ' ' || s[1] == '\t' || !s[1]))
+		return (6);
+	return (0);
+}
+
+/* Vrai si les 6 éléments sont définis */
+static int	all_elements_set(t_data *data)
+{
+	return (data->cfg.no && data->cfg.so && data->cfg.we && data->cfg.ea
+		&& data->cfg.floor != -1 && data->cfg.ceiling != -1);
+}
+
+/* parse les éléments s'arrête à la 1er ligne de map, vérifie
+   que tout est présent + puis construit la grille */
+int	process_lines(t_data *data, char **lines)
+{
+	int		i;
+	char	*t;
+
+	i = 0;
+	while (lines[i])
+	{
+		t = skip_spaces(lines[i]);
+		if (line_is_empty(t))
+			i++;
+		else if (get_element_id(t) == 0)
+			break ;
+		else
+		{
+			parse_element(data, t);
+			i++;
+		}
+	}
+	if (!all_elements_set(data))
+		error_exit(data, "Missing or duplicate element (NO SO WE EA F C)");
+	if (!lines[i])
+		error_exit(data, "Empty map");
+	build_map(data, lines, i);
+	return (1);
+}

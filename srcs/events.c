@@ -6,13 +6,13 @@
 /*   By: gechavia <gechavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:28:57 by gechavia          #+#    #+#             */
-/*   Updated: 2026/07/11 16:28:58 by gechavia         ###   ########.fr       */
+/*   Updated: 2026/07/17 03:16:28 by gechavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/* On ne bouge PAS le joueur ici on lève juste le flag. */
+/* On ne bouge PAS le joueur ici on lève juste le flag */
 int	on_keypress(int keycode, t_data *d)
 {
 	if (keycode == K_ESC)
@@ -32,7 +32,7 @@ int	on_keypress(int keycode, t_data *d)
 	return (0);
 }
 
-/* Relachement : on baisse le flag. Le mouvement continu est géré
+/* Relachement : on baisse le flag le mouvement continu est géré
    frame par frame dans render_frame */
 int	on_keyrelease(int keycode, t_data *d)
 {
@@ -51,7 +51,7 @@ int	on_keyrelease(int keycode, t_data *d)
 	return (0);
 }
 
-/* Clic sur la croix rouge (event 17). */
+/* Clic sur la croix rouge */
 int	on_destroy(t_data *d)
 {
 	close_program(d);

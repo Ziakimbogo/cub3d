@@ -6,90 +6,77 @@
 /*   By: gechavia <gechavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:42:57 by gechavia          #+#    #+#             */
-/*   Updated: 2026/07/11 16:43:20 by gechavia         ###   ########.fr       */
+/*   Updated: 2026/07/17 04:54:53 by gechavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	count_row(char *line, t_game *game, int y)
+/* Enlève les char de fin de ligne (\n puis \r pour les
+   CR = \r = windows et LF = \n = unix le tout formant le CRLF*/
+void	strip_newline(char *s)
 {
-	int	x;
+	int	len;
 
-	x = 0;
-	while (x < game->map.width && line[x] && line[x] != '\n' && line[x] != '\r')
-	{
-		if (line[x] == 'C')
-			game->map.collectibles++;
-		else if (line[x] == 'E')
-			game->map.exits++;
-		else if (line[x] == 'P')
-		{
-			game->map.players++;
-			game->player_x = x;
-			game->player_y = y;
-		}
-		else if (line[x] != '0' && line[x] != '1')
-			error_exit(game, "Invalid character in map");
-		x++;
-	}
+	len = ft_strlen(s);
+	if (len > 0 && s[len - 1] == '\n')
+		s[--len] = '\0';
+	if (len > 0 && s[len - 1] == '\r')
+		s[--len] = '\0';
 }
 
-static void	fill_map(int fd, t_game *game)
+/* Duplication d'un tableau de lignes + ajout d'une ligne à la fin.
+   Libère l'ancien tableau. */
+static char	**append_line(char **arr, char *s, int n)
 {
-	char	*line;
-	int		y;
-	int		line_len;
+	char	**new;
+	int		i;
 
-	y = 0;
+	new = (char **)malloc(sizeof(char *) * (n + 2));
+	if (!new)
+		return (NULL);
+	i = 0;
+	while (i < n)
+	{
+		new[i] = arr[i];
+		i++;
+	}
+	new[n] = s;
+	new[n + 1] = NULL;
+	free(arr);
+	return (new);
+}
+
+/* lit tableau ligne par ligne */
+char	**read_file_lines(int fd)
+{
+	char	**lines;
+	char	*line;
+	int		n;
+
+	lines = (char **)malloc(sizeof(char *));
+	if (!lines)
+		return (NULL);
+	lines[0] = NULL;
+	n = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
-		line_len = ft_strlen(line);
-		if (line_len > 0 && line[line_len - 1] == '\n')
-			line_len--;
-		if (line_len > 0 && line[line_len - 1] == '\r')
-			line_len--;
-		if (line_len != game->map.width)
-		{
-			free(line);
-			error_exit(game, "Map is not rectangular");
-		}
-		game->map.data[y] = line;
-		count_row(line, game, y);
-		y++;
+		strip_newline(line);
+		lines = append_line(lines, line, n++);
+		if (!lines)
+			return (NULL);
 		line = get_next_line(fd);
 	}
+	return (lines);
 }
 
-static void	ft_calc_map_width(t_game *game, int fd)
-{
-	char	*line;
-
-	game->map.height = 0;
-	line = get_next_line(fd);
-	if (!line)
-		error_exit(game, "Empty map");
-	game->map.width = ft_strlen(line);
-	if (game->map.width > 0 && line[game->map.width - 1] == '\n')
-		game->map.width--;
-	if (game->map.width > 0 && line[game->map.width - 1] == '\r')
-		game->map.width--;
-	if (game->map.width >= LIMIT_W)
-		error_exit(game, "LIMITE ATTEINTE (largeur)");
-	if (game->map.height >= LIMIT_H)
-		error_exit(game, "LIMITE ATTEINTE (hauteur)");
-	while (line)
-	{
-		game->map.height++;
-		free(line);
-		line = get_next_line(fd);
-	}
-}
-
-int	parse_map(char *file, t_game *game)
+/* ouvre le fichier, lit les lignes, sépare
+   éléments et map, construit la grille */
+int	parse_map(char *file, t_data *data)
 {
 	int		fd;
+	char	**lines;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
@@ -97,15 +84,11 @@ int	parse_map(char *file, t_game *game)
 		ft_putstr_fd("Error\nCannot open map file\n", 2);
 		return (0);
 	}
-	ft_calc_map_width(game, fd);
+	lines = read_file_lines(fd);
 	close(fd);
-	game->map.data = (char **)ft_calloc(game->map.height, sizeof(char *));
-	if (!game->map.data)
-		error_exit(game, "Malloc failed");
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		error_exit(game, "Cannot reopen map file");
-	fill_map(fd, game);
-	close(fd);
+	if (!lines)
+		error_exit(data, "Malloc failed");
+	process_lines(data, lines);
+	free_lines(lines);
 	return (1);
 }

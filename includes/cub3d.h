@@ -6,7 +6,7 @@
 /*   By: gechavia <gechavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:28:56 by gechavia          #+#    #+#             */
-/*   Updated: 2026/07/11 16:50:41 by gechavia         ###   ########.fr       */
+/*   Updated: 2026/07/15 23:04:24 by gechavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <fcntl.h>
 # include <math.h>
+# include "libft.h"
+# include "get_next_line.h"
 
 # define WIN_W 1280
 # define WIN_H 720
@@ -62,24 +65,38 @@ typedef struct s_img
 	int		endian; // métaonneés calcul de l'endianness (boutisme) https://fr.wikipedia.org/wiki/Boutisme 
 }	t_img;
 
-typedef struct s_data
-{
-	void	*mlx;
-	void	*win;
-	t_img	img;
-	t_keys	keys;
-}	t_data;
-
+/* Grille de la map : lignes avec des espaces, des 1, des 0, et un seul caractère de départ du joueur (N/S/E/W).
+   largeur = ligne la plus longue, hauteur = nombre de lignes. */
 typedef struct s_map
 {
 	char	**data;
 	int		width;
 	int		height;
-	int		collectibles;
-	int		exits;
-	int		players;
 }	t_map;
 
+/* Couleurs au format 0x00RRGGBB, -1 tant qu'elles ne sont pas définies. */
+typedef struct s_config
+{
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	int		floor;
+	int		ceiling;
+}	t_config;
+
+typedef struct s_data
+{
+	void		*mlx;
+	void		*win;
+	t_img		img;
+	t_keys		keys;
+	t_config	cfg;
+	t_map		map;
+	int			player_x;
+	int			player_y;
+	char		player_dir;
+}	t_data;
 
 /* window.c */
 int		init_window(t_data *d);
@@ -93,5 +110,32 @@ int		on_destroy(t_data *d);
 /* render.c */
 void	put_pixel(t_img *img, int x, int y, int color);
 int		render_frame(t_data *d);
+
+/* parsing.c */
+int		parse_map(char *file, t_data *data);
+void	strip_newline(char *s);
+char	**read_file_lines(int fd);
+
+/* parse_lines.c */
+char	*skip_spaces(char *s);
+int		line_is_empty(char *s);
+int		get_element_id(char *s);
+int		process_lines(t_data *data, char **lines);
+
+/* parse_element.c */
+void	parse_element(t_data *data, char *line);
+
+/* parse_color.c */
+int		parse_color(t_data *data, char *s);
+
+/* map_build.c */
+void	build_map(t_data *data, char **lines, int start);
+
+/* map_check.c */
+int		check_map(t_data *data);
+
+/* utils.c */
+void	error_exit(t_data *data, char *msg);
+void	free_lines(char **arr);
 
 #endif

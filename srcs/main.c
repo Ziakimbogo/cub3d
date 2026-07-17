@@ -6,7 +6,7 @@
 /*   By: gechavia <gechavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:28:53 by gechavia          #+#    #+#             */
-/*   Updated: 2026/07/11 16:41:05 by gechavia         ###   ########.fr       */
+/*   Updated: 2026/07/17 04:51:39 by gechavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ static int	check_one(int ac, char **av, t_data *data)
 		return (1);
 	}
 	ft_bzero(data, sizeof(t_data));
+	data->cfg.floor = -1;
+	data->cfg.ceiling = -1;
 	if (!parse_map(av[1], data))
 		error_exit(data, "Map parsing failed");
 	if (!check_map(data))
 		error_exit(data, "Invalid map");
-	if (!check_path(data))
-		error_exit(data, "No valid path in map");
 	return (0);
 }
 
@@ -62,11 +62,11 @@ static int	check_one(int ac, char **av, t_data *data)
 // 	return (1);
 // }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	data = (t_data){0};
+	//data = (t_data){0}; ft_bzero le fait déjà dans check_one
 	if (check_one(argc, argv, &data))
 		return (1);
 	if (!init_window(&data))

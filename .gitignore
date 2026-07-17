@@ -1,0 +1,9 @@
+# Binaire
+cub3D
+
+# Objets de compilation
+objs/
+*.o
+
+# MiniLibX : clonee automatiquement par le Makefile (regle $(MLX_A))
+minilibx-linux/
