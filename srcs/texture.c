@@ -6,7 +6,7 @@
 /*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 11:28:57 by catrenet          #+#    #+#             */
-/*   Updated: 2026/07/21 09:15:27 by catrenet         ###   ########.fr       */
+/*   Updated: 2026/07/21 10:47:09 by catrenet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ void	load_textures(t_data *d)
 // Pick correct textures to apply based on side + direction
 static void	pick_texture(t_ray *ray)
 {
-	if (ray->side == 0)
+	if (ray->side == 0) // hits vertical grid line ie E/W wall
 	{
 		if (ray->dir_x > 0)
 			ray->texture_id = TEX_EA;
 		else
 			ray->texture_id = TEX_WE;
 	}
-	else
+	else // hits horizontal grid line
 	{
 		if (ray->dir_y > 0)
 			ray->texture_id = TEX_SO;

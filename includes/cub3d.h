@@ -6,7 +6,7 @@
 /*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:28:56 by gechavia          #+#    #+#             */
-/*   Updated: 2026/07/18 16:43:47 by catrenet         ###   ########.fr       */
+/*   Updated: 2026/07/21 10:54:16 by catrenet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@
 # define TEX_EA		4
 
 /* move + rotation */
-# define MOVE_SPEED	0.02
-# define ROTATE_SPEED	0.015
+# define MOVE_SPEED	0.01
+# define ROTATE_SPEED	0.01
 
 /* collision */
 # define COL_RADIUS 0.2
@@ -194,5 +194,6 @@ int		tex_color(t_data *d, t_ray *ray, int tex_x, int tex_y);
 /* utils.c */
 void	error_exit(t_data *data, char *msg);
 void	free_lines(char **arr);
+int		get_sign(double a, double b);
 
 #endif

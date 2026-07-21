@@ -6,7 +6,7 @@
 /*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 10:08:50 by catrenet          #+#    #+#             */
-/*   Updated: 2026/07/21 09:14:33 by catrenet         ###   ########.fr       */
+/*   Updated: 2026/07/21 10:27:39 by catrenet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ static void	step_next_grid(t_data *data, t_ray *ray)
 /* step to closest grid line x or y */
 static void	dda_algo(t_data *data, t_ray *ray)
 {
-	int	hit;
+	int	line;
 
-	hit = 0;
-	while (!hit)
+	line = 0;
+	while (!line)
 	{
 		if (ray->next_cell_x < ray->next_cell_y) // x is closer
 		{
@@ -78,7 +78,7 @@ static void	dda_algo(t_data *data, t_ray *ray)
 			ray->side = 1;
 		}
 		if (data->map.data[ray->grid_y][ray->grid_x] == '1')
-			hit = 1;
+			line = 1;
 	}
 }
 

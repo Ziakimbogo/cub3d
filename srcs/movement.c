@@ -6,18 +6,11 @@
 /*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/18 13:45:05 by catrenet          #+#    #+#             */
-/*   Updated: 2026/07/21 09:16:09 by catrenet         ###   ########.fr       */
+/*   Updated: 2026/07/21 10:53:32 by catrenet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static int	get_sign(double a, double b)
-{
-	if (a > b)
-		return (1);
-	return (-1);
-}
 
 // move only if not a wall
 static void	try_move(t_data *d, double new_x, double new_y)

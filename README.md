@@ -71,5 +71,6 @@ Cub3D is a raycasting project inspired by the classic game Wolfenstein 3D. It re
 - https://www.geeksforgeeks.org/maths/rotation-matrix/
 - https://en.wikipedia.org/wiki/Endianness
 - https://www.geeksforgeeks.org/dsa/little-and-big-endian-mystery/
+- https://opengameart.org/
 
 <ins> AI Usage </ins>
