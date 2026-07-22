@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gechavia <gechavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:28:53 by gechavia          #+#    #+#             */
-/*   Updated: 2026/07/17 04:51:39 by gechavia         ###   ########.fr       */
+/*   Updated: 2026/07/18 15:31:07 by catrenet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,13 @@ static int	check_one(int ac, char **av, t_data *data)
 // 	return (1);
 // }
 
+static int	game_loop(t_data *d)
+{
+	move_player(d);
+	render_frame(d);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -69,6 +76,7 @@ int	main(int argc, char **argv)
 	//data = (t_data){0}; ft_bzero le fait déjà dans check_one
 	if (check_one(argc, argv, &data))
 		return (1);
+	init_player(&data);
 	if (!init_window(&data))
 	{
 		write(2, "Error\nmlx init failed\n", 22);
@@ -76,10 +84,11 @@ int	main(int argc, char **argv)
 	}
 		// if (!load_images(&data))
 		// error_exit(&data, "Loading images failed");
+	load_textures(&data);
 	mlx_hook(data.win, EV_KEYPRESS, M_KEYPRESS, on_keypress, &data);
 	mlx_hook(data.win, EV_KEYRELEASE, M_KEYRELEASE, on_keyrelease, &data);
 	mlx_hook(data.win, EV_DESTROY, M_DESTROY, on_destroy, &data);
-	mlx_loop_hook(data.mlx, render_frame, &data);
+	mlx_loop_hook(data.mlx, game_loop, &data);
 	mlx_loop(data.mlx);
 	return (0);
 }

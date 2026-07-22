@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gechavia <gechavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:28:56 by gechavia          #+#    #+#             */
-/*   Updated: 2026/07/15 23:04:24 by gechavia         ###   ########.fr       */
+/*   Updated: 2026/07/21 10:54:16 by catrenet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,19 @@
 # define M_KEYRELEASE   (1L << 1)
 # define M_DESTROY      (1L << 17)
 
+/* texture indices */
+# define TEX_NO		1
+# define TEX_SO		2
+# define TEX_WE		3
+# define TEX_EA		4
+
+/* move + rotation */
+# define MOVE_SPEED	0.01
+# define ROTATE_SPEED	0.01
+
+/* collision */
+# define COL_RADIUS 0.2
+
 /* Déplacement touches 1 == touchés // 0 pas touchés. On les met à jour dans on_keypress et on_keyrelease.
    Lues chaque frame par le loop_hook -> mouvement fluide. */
 typedef struct s_keys
@@ -62,7 +75,9 @@ typedef struct s_img
 	char	*addr; // buffer de pixels
 	int		bpp; // bits par pixel
 	int		line_len; // longueur d'une ligne en octets
-	int		endian; // métaonneés calcul de l'endianness (boutisme) https://fr.wikipedia.org/wiki/Boutisme 
+	int		endian; // métaonneés calcul de l'endianness (boutisme) https://fr.wikipedia.org/wiki/Boutisme
+	int		width;
+	int	height; 
 }	t_img;
 
 /* Grille de la map : lignes avec des espaces, des 1, des 0, et un seul caractère de départ du joueur (N/S/E/W).
@@ -96,7 +111,35 @@ typedef struct s_data
 	int			player_x;
 	int			player_y;
 	char		player_dir;
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
+	t_img		tex[4];
 }	t_data;
+
+typedef struct s_ray
+{
+	int		grid_x;
+	int		grid_y;
+	int		step_x;	// direction (+1 R/-1 L) along the grid
+	int		step_y;	// direction (+1 U/-1 D) along the grid
+	int		side;
+	int		wall_h;
+	int		draw_start;
+	int		draw_end;
+	int		texture_id;
+	double	dir_x;	// player direction
+	double	dir_y;
+	double	cell_dist_x;	// distance to cross one full grid cell
+	double	cell_dist_y;
+	double	next_cell_x;	// distance to first grid line crossed
+	double	next_cell_y;	
+	double	perp_dist;
+	double	wall_tex_x;
+}	t_ray;
 
 /* window.c */
 int		init_window(t_data *d);
@@ -134,8 +177,23 @@ void	build_map(t_data *data, char **lines, int start);
 /* map_check.c */
 int		check_map(t_data *data);
 
+/* movement.c */
+void	move_player(t_data *data);
+
+/* player.c */
+void	init_player(t_data *d);
+
+/* raycasting.h */
+void	cast_ray(t_data *d, t_ray *ray, int x);
+
+/* texture.c */
+void	load_textures(t_data *d);
+void	tex_and_wallx(t_data *d, t_ray *ray);
+int		tex_color(t_data *d, t_ray *ray, int tex_x, int tex_y);
+
 /* utils.c */
 void	error_exit(t_data *data, char *msg);
 void	free_lines(char **arr);
+int		get_sign(double a, double b);
 
 #endif

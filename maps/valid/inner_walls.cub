@@ -1,9 +1,9 @@
-NO ./minilibx-linux/test/open.xpm
-SO ./minilibx-linux/test/open.xpm
-WE ./minilibx-linux/test/open.xpm
-EA ./minilibx-linux/test/open.xpm
-F 220,100,0
-C 225,30,0
+NO ./textures/space_128/north.xpm
+SO ./textures/space_128/south.xpm
+WE ./textures/space_128/west.xpm
+EA ./textures/space_128/east.xpm
+F 70,75,80
+C 130,135,140
 
 111111
 100101

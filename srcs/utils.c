@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gechavia <gechavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 00:00:00 by gechavia          #+#    #+#             */
-/*   Updated: 2026/07/17 03:23:45 by gechavia         ###   ########.fr       */
+/*   Updated: 2026/07/21 10:53:59 by catrenet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,3 +52,11 @@ void	error_exit(t_data *data, char *msg)
 	}
 	exit(1);
 }
+
+int	get_sign(double a, double b)
+{
+	if (a > b)
+		return (1);
+	return (-1);
+}
+

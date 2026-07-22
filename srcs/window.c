@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gechavia <gechavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 03:23:50 by gechavia          #+#    #+#             */
-/*   Updated: 2026/07/17 03:24:25 by gechavia         ###   ########.fr       */
+/*   Updated: 2026/07/18 17:03:45 by catrenet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ int	close_program(t_data *d)
 		mlx_destroy_display(d->mlx);
 		free(d->mlx);
 	}
+	free_lines(d->map.data);
+	free(d->cfg.no);
+	free(d->cfg.so);
+	free(d->cfg.we);
+	free(d->cfg.ea);
 	exit(0);
 	return (0);
 }

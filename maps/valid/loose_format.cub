@@ -1,11 +1,11 @@
-	C 225,30,0
-   F 220,100,0
+	F 70,75,80
+   C 130,135,140
 
-EA	./minilibx-linux/test/open.xpm
-WE ./minilibx-linux/test/open.xpm
+NO ./textures/space_128/north.xpm
+SO ./textures/space_128/south.xpm
 
-SO ./minilibx-linux/test/open.xpm
-NO ./minilibx-linux/test/open.xpm
+WE ./textures/space_128/west.xpm
+EA ./textures/space_128/east.xpm
 
 111111
 100001

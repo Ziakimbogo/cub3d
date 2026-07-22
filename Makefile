@@ -19,7 +19,8 @@ OBJDIR		= objs
 SRCS		= main.c window.c events.c render.c \
 			  parsing.c parse_lines.c parse_element.c parse_color.c \
 			  map_build.c map_check.c utils.c \
-			  get_next_line.c get_next_line_utils.c
+			  get_next_line.c get_next_line_utils.c \
+			  raycasting.c texture.c player.c movement.c
 OBJS		= $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
 all: $(NAME)
