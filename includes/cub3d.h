@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gechavia <gechavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:28:56 by gechavia          #+#    #+#             */
-/*   Updated: 2026/07/21 10:54:16 by catrenet         ###   ########.fr       */
+/*   Updated: 2026/07/22 19:07:39 by gechavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,8 @@ typedef struct s_data
 	double		dir_y;
 	double		plane_x;
 	double		plane_y;
-	t_img		tex[4];
+	
+	
 }	t_data;
 
 typedef struct s_ray
