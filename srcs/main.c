@@ -6,7 +6,7 @@
 /*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:28:53 by gechavia          #+#    #+#             */
-/*   Updated: 2026/07/18 15:31:07 by catrenet         ###   ########.fr       */
+/*   Updated: 2026/07/28 10:44:05 by catrenet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,6 @@ static int	check_one(int ac, char **av, t_data *data)
 	return (0);
 }
 
-// int	load_images(t_data *data)
-// {
-// 	if (!load_image(data, &data->wall, "textures/wall.xpm"))
-// 		return (0);
-// 	if (!load_image(data, &data->floor, "textures/floor.xpm"))
-// 		return (0);
-// 	if (!load_image(data, &data->player, "textures/player.xpm"))
-// 		return (0);
-// 	if (!load_image(data, &data->collect, "textures/collect.xpm"))
-// 		return (0);
-// 	if (!load_image(data, &data->exit, "textures/exit.xpm"))
-// 		return (0);
-// 	return (1);
-// }
-
 static int	game_loop(t_data *d)
 {
 	move_player(d);
@@ -73,7 +58,6 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	//data = (t_data){0}; ft_bzero le fait déjà dans check_one
 	if (check_one(argc, argv, &data))
 		return (1);
 	init_player(&data);
@@ -82,8 +66,6 @@ int	main(int argc, char **argv)
 		write(2, "Error\nmlx init failed\n", 22);
 		return (1);
 	}
-		// if (!load_images(&data))
-		// error_exit(&data, "Loading images failed");
 	load_textures(&data);
 	mlx_hook(data.win, EV_KEYPRESS, M_KEYPRESS, on_keypress, &data);
 	mlx_hook(data.win, EV_KEYRELEASE, M_KEYRELEASE, on_keyrelease, &data);

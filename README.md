@@ -19,7 +19,7 @@ Cub3D is a raycasting project inspired by the classic game Wolfenstein 3D. It re
 
 - Raycasting: rendering technique used to create the illusion of a 3D world in 2D. For every vertical column of pixels on the screen, a ray is cast into the map until it intersects a wall. The distance to the wall determines the height of the wall slice that is drawn, creating a perspective effect.
 
-- Digital Differential Analyzer (DDA): algorithm used during raycasting to efficiently determine which wall a ray intersects first. Starting from the player's position, the ray advances from one grid cell to the next by repeatedly stepping to the nearest horizontal or vertical map boundary. This avoids checking every point along the ray, making wall detection both fast and well suited for grid-based maps.
+- Digital Differential Analyzer (DDA): algorithm used during raycasting to efficiently determine which wall a ray intersects first by stepping from one grid cell to the next on the nearest horizontal or vertical grid line. This avoids checking every point along the ray, thus both avoiding unnecessary calculations and ensuring no wall is missed.
 
 - Camera Plane: vector perpendicular to the player's viewing direction. It defines the width of the player's field of view (FOV). Rays are cast through different points along this plane, rendering the scene from left to right.
 
@@ -29,7 +29,7 @@ Cub3D is a raycasting project inspired by the classic game Wolfenstein 3D. It re
 
 - Fish-eye correction: using the perpendicular distance to the camera plane to ensure walls maintain a consistent appearance across the screen instead of the raw distance traveled by each ray which causes walls near the edges to appear distorted. 
 
-- Texture Mapping: instead of rendering walls as solid colors, texture mapping applies an image to each wall surface. We calculate the exact point where a ray hits a wall and uses that information to determine which column of the texture should be displayed.
+- Texture Mapping: applying an image to each wall surface. We calculate the exact point where a ray hits a wall and use that information to determine which column of the texture should be displayed.
 
 ## Instructions
 
@@ -74,3 +74,5 @@ Cub3D is a raycasting project inspired by the classic game Wolfenstein 3D. It re
 - https://opengameart.org/
 
 <ins> AI Usage </ins>
+
+AI was used to help explain some of the concepts as well as to help testing.
