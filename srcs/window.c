@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gechavia <gechavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 03:23:50 by gechavia          #+#    #+#             */
-/*   Updated: 2026/07/22 19:17:25 by catrenet         ###   ########.fr       */
+/*   Updated: 2026/07/22 19:08:03 by gechavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ int	init_window(t_data *d)
    mlx_destroy_display + free(mlx) */
 int	close_program(t_data *d)
 {
-	int    i;
+	int	i;
 
-	i = 0;
-	while (i < 4)
+    i = 0;
+    while (i < 4)
     {
 		if (d->tex[i].ptr)
 		mlx_destroy_image(d->mlx, d->tex[i].ptr);
-		i++;
+	i++;
 	}
 	if (d->img.ptr)
 		mlx_destroy_image(d->mlx, d->img.ptr);
