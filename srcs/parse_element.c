@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parse_element.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gechavia <gechavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 00:00:00 by gechavia          #+#    #+#             */
 /*   Updated: 2026/07/22 13:31:12 by gechavia         ###   ########.fr       */
