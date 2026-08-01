@@ -12,7 +12,6 @@
 
 #include "cub3d.h"
 
-/* Enregistre texture : refuse doublon / valeur vide / fichier inexistant ou illisible */
 static void	set_texture(t_data *data, char **slot, char *val)
 {
 	int	fd;
@@ -28,7 +27,6 @@ static void	set_texture(t_data *data, char **slot, char *val)
 	*slot = val;
 }
 
-/* Enregistre une couleur sol (5) ou plafond (6) SANS doublons */
 static void	set_color(t_data *data, int id, char *val)
 {
 	int	color;
@@ -48,7 +46,6 @@ static void	set_color(t_data *data, int id, char *val)
 	}
 }
 
-/* Parse (NO/SO/WE/EA/F/C) */
 void	parse_element(t_data *data, char *line)
 {
 	int		id;
@@ -63,6 +60,7 @@ void	parse_element(t_data *data, char *line)
 	val = ft_strtrim(line + len, " \t");
 	if (!val)
 		error_exit(data, "Malloc failed");
+	data->tmp.val = val;
 	if (id == 1)
 		set_texture(data, &data->cfg.no, val);
 	else if (id == 2)
@@ -76,4 +74,5 @@ void	parse_element(t_data *data, char *line)
 		set_color(data, id, val);
 		free(val);
 	}
+	data->tmp.val = NULL;
 }

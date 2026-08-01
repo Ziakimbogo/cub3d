@@ -12,8 +12,6 @@
 
 #include "cub3d.h"
 
-/* Enlève les char de fin de ligne (\n puis \r pour les
-   CR = \r = windows et LF = \n = unix le tout formant le CRLF*/
 void	strip_newline(char *s)
 {
 	int	len;
@@ -25,8 +23,6 @@ void	strip_newline(char *s)
 		s[--len] = '\0';
 }
 
-/* Duplication d'un tableau de lignes + ajout d'une ligne à la fin.
-   Libère l'ancien tableau. */
 static char	**append_line(char **arr, char *s, int n)
 {
 	char	**new;
@@ -47,7 +43,6 @@ static char	**append_line(char **arr, char *s, int n)
 	return (new);
 }
 
-/* lit tableau ligne par ligne */
 char	**read_file_lines(int fd)
 {
 	char	**lines;
@@ -71,8 +66,6 @@ char	**read_file_lines(int fd)
 	return (lines);
 }
 
-/* ouvre le fichier, lit les lignes, sépare
-   éléments et map, construit la grille */
 int	parse_map(char *file, t_data *data)
 {
 	int		fd;
@@ -88,7 +81,9 @@ int	parse_map(char *file, t_data *data)
 	close(fd);
 	if (!lines)
 		error_exit(data, "Malloc failed");
+	data->tmp.lines = lines;
 	process_lines(data, lines);
+	data->tmp.lines = NULL;
 	free_lines(lines);
 	return (1);
 }

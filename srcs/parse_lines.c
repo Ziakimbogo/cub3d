@@ -12,7 +12,6 @@
 
 #include "cub3d.h"
 
-/* Avance les espaces et tab */
 char	*skip_spaces(char *s)
 {
 	while (*s == ' ' || *s == '\t')
@@ -20,14 +19,11 @@ char	*skip_spaces(char *s)
 	return (s);
 }
 
-/* Une ligne est "vide" si elle a que des espaces/tabs */
 int	line_is_empty(char *s)
 {
 	return (*skip_spaces(s) == '\0');
 }
 
-/* 1=NO 2=SO 3=WE 4=EA 5=F 6=C,
-   0 = début de la map. Le next char doit être espace / tab / fin ligne */
 int	get_element_id(char *s)
 {
 	if (!ft_strncmp(s, "NO", 2) && (s[2] == ' ' || s[2] == '\t' || !s[2]))
@@ -45,15 +41,12 @@ int	get_element_id(char *s)
 	return (0);
 }
 
-/* Vrai si les 6 éléments sont définis */
 static int	all_elements_set(t_data *data)
 {
 	return (data->cfg.no && data->cfg.so && data->cfg.we && data->cfg.ea
 		&& data->cfg.floor != -1 && data->cfg.ceiling != -1);
 }
 
-/* parse les éléments s'arrête à la 1er ligne de map, vérifie
-   que tout est présent + puis construit la grille */
 int	process_lines(t_data *data, char **lines)
 {
 	int		i;

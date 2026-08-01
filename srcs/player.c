@@ -44,7 +44,6 @@ static void	init_east(t_data *d)
 	d->plane_y = 0.66;
 }
 
-/* +0.5 to put player in middle of cell */
 void	init_player(t_data *d)
 {
 	d->pos_x = d->player_x + 0.5;

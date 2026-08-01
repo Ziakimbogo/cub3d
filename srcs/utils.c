@@ -27,7 +27,6 @@ void	free_lines(char **arr)
 	free(arr);
 }
 
-/* free texture stockés dans la config */
 static void	free_config(t_data *data)
 {
 	free(data->cfg.no);
@@ -36,7 +35,14 @@ static void	free_config(t_data *data)
 	free(data->cfg.ea);
 }
 
-/* Affiche "Error\n<msg>\n", libère la map et la config, puis quitte */
+static void	free_tmp(t_data *data)
+{
+	free_lines(data->tmp.lines);
+	free_lines(data->tmp.parts);
+	free(data->tmp.val);
+	free(data->tmp.tok);
+}
+
 void	error_exit(t_data *data, char *msg)
 {
 	ft_putstr_fd("Error\n", 2);
@@ -47,6 +53,7 @@ void	error_exit(t_data *data, char *msg)
 	}
 	if (data)
 	{
+		free_tmp(data);
 		free_lines(data->map.data);
 		free_config(data);
 	}
@@ -59,4 +66,3 @@ int	get_sign(double a, double b)
 		return (1);
 	return (-1);
 }
-

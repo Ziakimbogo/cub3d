@@ -6,13 +6,12 @@
 /*   By: gechavia <gechavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 03:23:50 by gechavia          #+#    #+#             */
-/*   Updated: 2026/07/22 19:08:03 by gechavia         ###   ########.fr       */
+/*   Updated: 2026/07/29 21:30:16 by gechavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/* Crée la connexion, la fenêtre et l'image */
 int	init_window(t_data *d)
 {
 	d->mlx = mlx_init();
@@ -31,18 +30,16 @@ int	init_window(t_data *d)
 	return (1);
 }
 
-/* Libération propre : image, fenêtre, display, contexte.
-   mlx_destroy_display + free(mlx) */
 int	close_program(t_data *d)
 {
 	int	i;
 
-    i = 0;
-    while (i < 4)
-    {
+	i = 0;
+	while (i < TEX_COUNT)
+	{
 		if (d->tex[i].ptr)
-		mlx_destroy_image(d->mlx, d->tex[i].ptr);
-	i++;
+			mlx_destroy_image(d->mlx, d->tex[i].ptr);
+		i++;
 	}
 	if (d->img.ptr)
 		mlx_destroy_image(d->mlx, d->img.ptr);

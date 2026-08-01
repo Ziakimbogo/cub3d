@@ -3,16 +3,15 @@ NAME		= cub3D
 CC		= cc
 CFLAGS		= -Wall -Wextra -Werror -std=c17
 
-# --- MiniLibX (Linux) ---
 LIBMLX		= minilibx-linux
 MLX_A		= $(LIBMLX)/libmlx.a
 MLXFLAGS	= -L$(LIBMLX) -lmlx -lXext -lX11 -lm
 
-# --- libft (archive pré-compilée) ---
 LIBFT_DIR	= libft
 LIBFT_A		= $(LIBFT_DIR)/libft.a
 
 INCLUDES	= -Isrcs -Iincludes -I$(LIBMLX) -I$(LIBFT_DIR)
+HEADERS		= includes/cub3d.h includes/get_next_line.h
 
 SRCDIR		= srcs
 OBJDIR		= objs
@@ -25,9 +24,6 @@ OBJS		= $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
 all: $(NAME)
 
-# Les objets GNL (qui redéfinissent ft_strlen/strdup/strchr/strjoin) sont
-# placés AVANT $(LIBFT_A) : l'archive n'extrait alors pas ces membres,
-# ce qui évite les erreurs de "multiple definition".
 $(NAME): $(MLX_A) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) $(MLXFLAGS) -o $(NAME)
 
@@ -38,7 +34,7 @@ $(MLX_A):
 	fi
 	@$(MAKE) -C $(LIBMLX)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
+$(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS)
 	@mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 

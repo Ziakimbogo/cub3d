@@ -12,14 +12,11 @@
 
 #include "cub3d.h"
 
-/* Case "intérieure" : sol vide ou position de départ du joueur */
 static int	is_walkable(char c)
 {
 	return (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
 
-/* Une case intérieure est "ouverte" si elle touche un bord de la grille
-   ou une case vide (espace) --> la map n'est pas fermée */
 static int	cell_open(t_data *data, int x, int y)
 {
 	char	**g;
@@ -34,7 +31,6 @@ static int	cell_open(t_data *data, int x, int y)
 	return (0);
 }
 
-/* Valide une case : caractère autorisé, fermeture, et repère le joueur */
 static void	handle_cell(t_data *data, int x, int y, int *players)
 {
 	char	c;
@@ -55,7 +51,6 @@ static void	handle_cell(t_data *data, int x, int y, int *players)
 	}
 }
 
-/* Vérifie la map entière : renvoie 1 si valide */
 int	check_map(t_data *data)
 {
 	int	x;

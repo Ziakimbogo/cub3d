@@ -12,7 +12,6 @@
 
 #include "cub3d.h"
 
-/* Index de la dernière ligne non vide */
 static int	find_map_end(char **lines, int start)
 {
 	int	end;
@@ -29,7 +28,6 @@ static int	find_map_end(char **lines, int start)
 	return (end);
 }
 
-/* Largeur = longueur de la ligne la plus longue du bloc */
 static int	max_width(char **lines, int start, int end)
 {
 	int	width;
@@ -48,7 +46,6 @@ static int	max_width(char **lines, int start, int end)
 	return (width);
 }
 
-/* Copie une ligne en la complétant d'espaces jusqu'à width  */
 static char	*dup_padded(t_data *data, char *src, int width)
 {
 	char	*row;
@@ -69,8 +66,6 @@ static char	*dup_padded(t_data *data, char *src, int width)
 	return (row);
 }
 
-/* Construit la grille rectangulaire à partir des lignes de map.
-   Refuse toute ligne vide à l'intérieur du bloc */
 void	build_map(t_data *data, char **lines, int start)
 {
 	int	end;

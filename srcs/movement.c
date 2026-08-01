@@ -12,7 +12,6 @@
 
 #include "cub3d.h"
 
-// move only if not a wall
 static void	try_move(t_data *d, double new_x, double new_y)
 {
 	int		sign_x;

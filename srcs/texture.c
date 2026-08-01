@@ -12,7 +12,6 @@
 
 #include "cub3d.h"
 
-// Load one XPM texture file into image struct
 static void	load_one_texture(t_data *d, t_img *tex, char *path)
 {
 	tex->ptr = mlx_xpm_file_to_image(d->mlx, path, &tex->width, &tex->height);
@@ -32,17 +31,16 @@ void	load_textures(t_data *d)
 	load_one_texture(d, &d->tex[TEX_EA], d->cfg.ea);
 }
 
-// Pick correct textures to apply based on side + direction
 static void	pick_texture(t_ray *ray)
 {
-	if (ray->side == 0) // hits vertical grid line ie E/W wall
+	if (ray->side == 0)
 	{
 		if (ray->dir_x > 0)
 			ray->texture_id = TEX_EA;
 		else
 			ray->texture_id = TEX_WE;
 	}
-	else // hits horizontal grid line
+	else
 	{
 		if (ray->dir_y > 0)
 			ray->texture_id = TEX_SO;
@@ -51,7 +49,6 @@ static void	pick_texture(t_ray *ray)
 	}
 }
 
-/* set spot on wall where ray hits (0.0 to 1.0) to pick column of texture */
 void	tex_and_wallx(t_data *d, t_ray *ray)
 {
 	if (ray->side == 0)
