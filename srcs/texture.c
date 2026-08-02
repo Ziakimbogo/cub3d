@@ -6,7 +6,7 @@
 /*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 11:28:57 by catrenet          #+#    #+#             */
-/*   Updated: 2026/07/21 10:47:09 by catrenet         ###   ########.fr       */
+/*   Updated: 2026/08/02 17:19:26 by catrenet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	load_textures(t_data *d)
 	load_one_texture(d, &d->tex[TEX_EA], d->cfg.ea);
 }
 
+/* pick correct texture based on side + direction */
 static void	pick_texture(t_ray *ray)
 {
 	if (ray->side == 0)
@@ -49,6 +50,7 @@ static void	pick_texture(t_ray *ray)
 	}
 }
 
+/* calc where ray hits on wall (0-1) to pick column of texture */
 void	tex_and_wallx(t_data *d, t_ray *ray)
 {
 	if (ray->side == 0)
@@ -59,6 +61,7 @@ void	tex_and_wallx(t_data *d, t_ray *ray)
 	pick_texture(ray);
 }
 
+/* get rgba value from text image */
 int	tex_color(t_data *d, t_ray *ray, int tex_x, int tex_y)
 {
 	t_img	*tex;

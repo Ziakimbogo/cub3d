@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gechavia <gechavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 00:00:00 by gechavia          #+#    #+#             */
-/*   Updated: 2026/07/17 03:17:20 by gechavia         ###   ########.fr       */
+/*   Updated: 2026/08/02 17:22:05 by catrenet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/* check if floor or player direction */
 static int	is_walkable(char c)
 {
 	return (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
 
+/* check if map is closed */
 static int	cell_open(t_data *data, int x, int y)
 {
 	char	**g;
@@ -31,6 +33,7 @@ static int	cell_open(t_data *data, int x, int y)
 	return (0);
 }
 
+/* validate cell + record player pos */
 static void	handle_cell(t_data *data, int x, int y, int *players)
 {
 	char	c;
@@ -51,6 +54,7 @@ static void	handle_cell(t_data *data, int x, int y, int *players)
 	}
 }
 
+/* check only one player */
 int	check_map(t_data *data)
 {
 	int	x;

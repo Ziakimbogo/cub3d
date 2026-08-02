@@ -6,7 +6,7 @@
 /*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 00:00:00 by gechavia          #+#    #+#             */
-/*   Updated: 2026/07/18 17:34:37 by catrenet         ###   ########.fr       */
+/*   Updated: 2026/08/02 16:49:05 by catrenet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	line_is_empty(char *s)
 	return (*skip_spaces(s) == '\0');
 }
 
+/* identify line type */
 int	get_element_id(char *s)
 {
 	if (!ft_strncmp(s, "NO", 2) && (s[2] == ' ' || s[2] == '\t' || !s[2]))
@@ -41,12 +42,14 @@ int	get_element_id(char *s)
 	return (0);
 }
 
+/* check texture + colors set */
 static int	all_elements_set(t_data *data)
 {
 	return (data->cfg.no && data->cfg.so && data->cfg.we && data->cfg.ea
 		&& data->cfg.floor != -1 && data->cfg.ceiling != -1);
 }
 
+/* parse lines (NO/SO/WE/EA/F/C) */
 int	process_lines(t_data *data, char **lines)
 {
 	int		i;

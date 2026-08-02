@@ -6,12 +6,13 @@
 /*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 10:08:50 by catrenet          #+#    #+#             */
-/*   Updated: 2026/07/21 10:27:39 by catrenet         ###   ########.fr       */
+/*   Updated: 2026/08/02 17:03:46 by catrenet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/* calc from player direction + camera plane, set starting cell */
 static void	init_ray_direction(t_data *data, t_ray *ray, int i)
 {
 	double	camera_plane;
@@ -31,6 +32,7 @@ static void	init_ray_direction(t_data *data, t_ray *ray, int i)
 		ray->cell_dist_y = fabs(1.0 / ray->dir_y);
 }
 
+/* step direction (+1/-1) per axis + initial distance to next grid line */
 static void	step_next_grid(t_data *data, t_ray *ray)
 {
 	if (ray->dir_x < 0)
@@ -55,6 +57,7 @@ static void	step_next_grid(t_data *data, t_ray *ray)
 	}
 }
 
+/* step to closest grid line x or y */
 static void	dda_algo(t_data *data, t_ray *ray)
 {
 	int	line;
@@ -79,6 +82,7 @@ static void	dda_algo(t_data *data, t_ray *ray)
 	}
 }
 
+/* perpendicular dist to avoid fisheye distortion */
 static void	wall_height(t_ray *ray)
 {
 	if (ray->side == 0)

@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gechavia <gechavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:28:57 by gechavia          #+#    #+#             */
-/*   Updated: 2026/07/17 03:16:28 by gechavia         ###   ########.fr       */
+/*   Updated: 2026/08/02 16:01:32 by catrenet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/* no movement yet, raise flag only */
 int	on_keypress(int keycode, t_data *d)
 {
 	if (keycode == K_ESC)
@@ -31,6 +32,7 @@ int	on_keypress(int keycode, t_data *d)
 	return (0);
 }
 
+/* Lower flag */
 int	on_keyrelease(int keycode, t_data *d)
 {
 	if (keycode == K_W)

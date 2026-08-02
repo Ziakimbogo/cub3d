@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gechavia <gechavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:28:53 by gechavia          #+#    #+#             */
-/*   Updated: 2026/07/27 09:52:34 by gechavia         ###   ########.fr       */
+/*   Updated: 2026/08/02 16:06:47 by catrenet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/* Check ends with .cub extension */
 static int	check_extension(char *file)
 {
 	int	len;
@@ -25,6 +26,7 @@ static int	check_extension(char *file)
 	return (0);
 }
 
+/* Validate args + parse map */
 static int	check_one(int ac, char **av, t_data *data)
 {
 	if (ac != 2)

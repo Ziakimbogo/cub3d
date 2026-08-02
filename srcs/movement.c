@@ -6,12 +6,13 @@
 /*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/18 13:45:05 by catrenet          #+#    #+#             */
-/*   Updated: 2026/07/21 10:53:32 by catrenet         ###   ########.fr       */
+/*   Updated: 2026/08/02 16:32:25 by catrenet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/* move if not wall */
 static void	try_move(t_data *d, double new_x, double new_y)
 {
 	int		sign_x;

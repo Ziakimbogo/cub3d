@@ -6,7 +6,7 @@
 /*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 00:00:00 by gechavia          #+#    #+#             */
-/*   Updated: 2026/07/22 13:31:12 by gechavia         ###   ########.fr       */
+/*   Updated: 2026/08/02 16:45:32 by catrenet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,19 @@ static void	set_color(t_data *data, int id, char *val)
 	}
 }
 
+static void	set_texture_by_id(t_data *data, int id, char *val)
+{
+	if (id == 1)
+		set_texture(data, &data->cfg.no, val);
+	else if (id == 2)
+		set_texture(data, &data->cfg.so, val);
+	else if (id == 3)
+		set_texture(data, &data->cfg.we, val);
+	else
+		set_texture(data, &data->cfg.ea, val);
+}
+
+/* check line type + route to texture or color parsing */
 void	parse_element(t_data *data, char *line)
 {
 	int		id;
@@ -61,14 +74,8 @@ void	parse_element(t_data *data, char *line)
 	if (!val)
 		error_exit(data, "Malloc failed");
 	data->tmp.val = val;
-	if (id == 1)
-		set_texture(data, &data->cfg.no, val);
-	else if (id == 2)
-		set_texture(data, &data->cfg.so, val);
-	else if (id == 3)
-		set_texture(data, &data->cfg.we, val);
-	else if (id == 4)
-		set_texture(data, &data->cfg.ea, val);
+	if (id <= 4)
+		set_texture_by_id(data, id, val);
 	else
 	{
 		set_color(data, id, val);

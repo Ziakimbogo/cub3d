@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_build.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gechavia <gechavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 00:00:00 by gechavia          #+#    #+#             */
-/*   Updated: 2026/07/17 03:17:13 by gechavia         ###   ########.fr       */
+/*   Updated: 2026/08/02 16:11:54 by catrenet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/* last non-empty line index */
 static int	find_map_end(char **lines, int start)
 {
 	int	end;
@@ -28,6 +29,7 @@ static int	find_map_end(char **lines, int start)
 	return (end);
 }
 
+/* calc longest line */
 static int	max_width(char **lines, int start, int end)
 {
 	int	width;
@@ -46,6 +48,7 @@ static int	max_width(char **lines, int start, int end)
 	return (width);
 }
 
+/* copy + pad line with 0 to width */
 static char	*dup_padded(t_data *data, char *src, int width)
 {
 	char	*row;
@@ -66,6 +69,7 @@ static char	*dup_padded(t_data *data, char *src, int width)
 	return (row);
 }
 
+/* build rect map */
 void	build_map(t_data *data, char **lines, int start)
 {
 	int	end;

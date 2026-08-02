@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gechavia <gechavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 00:00:00 by gechavia          #+#    #+#             */
-/*   Updated: 2026/07/17 03:17:34 by gechavia         ###   ########.fr       */
+/*   Updated: 2026/08/02 16:38:14 by catrenet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static int	count_char(char *s, char c)
 	return (n);
 }
 
+/* trim + check rgb value */
 static int	component_value(t_data *data, char *tok)
 {
 	char	*t;
@@ -50,6 +51,7 @@ static int	component_value(t_data *data, char *tok)
 	return (v);
 }
 
+/* convert to 0xRRGGBB int*/
 int	parse_color(t_data *data, char *s)
 {
 	char	**parts;

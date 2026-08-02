@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gechavia <gechavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:28:56 by gechavia          #+#    #+#             */
-/*   Updated: 2026/07/22 19:09:42 by gechavia         ###   ########.fr       */
+/*   Updated: 2026/08/02 11:26:10 by catrenet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@
 # define EV_KEYPRESS    2
 # define EV_KEYRELEASE  3
 # define EV_DESTROY     17
-# define M_KEYPRESS     (1L << 0)
-# define M_KEYRELEASE   (1L << 1)
-# define M_DESTROY      (1L << 17)
+# define M_KEYPRESS     1L
+# define M_KEYRELEASE   2L
+# define M_DESTROY      131072L
 
 # define TEX_NO		1
 # define TEX_SO		2
@@ -70,7 +70,7 @@ typedef struct s_img
 	int		line_len;
 	int		endian;
 	int		width;
-	int	height;
+	int		height;
 }	t_img;
 
 typedef struct s_map

@@ -6,7 +6,7 @@
 /*   By: catrenet <catrenet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:28:56 by gechavia          #+#    #+#             */
-/*   Updated: 2026/07/18 17:36:05 by catrenet         ###   ########.fr       */
+/*   Updated: 2026/08/02 17:09:26 by catrenet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	draw_ceiling_floor(t_data *d, int x, t_ray *ray)
 	}
 }
 
+/* find correct column of image for this x */
 static int	get_tex_x(t_data *d, t_ray *ray)
 {
 	int		tex_x;
